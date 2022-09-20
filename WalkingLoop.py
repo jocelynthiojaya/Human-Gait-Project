@@ -77,8 +77,8 @@ for file in os.listdir(directory):
                 right_shoulder = detector.findAngle(img, 14, 12, 24)
                 right_elbow = detector.findAngle(img, 12, 14, 16)
 
-                
-                frame_list.append([current_Frame,right_hip,right_knee,right_ankle,right_elbow,right_shoulder])
+                # Change the Gender Accordingly
+                frame_list.append([current_Frame,right_hip,right_knee,right_ankle,right_elbow,right_shoulder, "gender"])
                 
                 right_hip_x.append(current_Frame)
                 right_hip_y.append(int(right_hip))
