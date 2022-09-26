@@ -1,15 +1,10 @@
 import cv2
-import mediapipe as mp
-import numpy as np
 import PoseModule as pm
-from math import factorial
-import csv
-import os
 from OutputGraph import outputGraph
 from OutputData import outputData
 
 
-filename = "jocefront3.mp4"
+filename = "a.mp4"
 if filename.endswith(".mp4"):
     print(filename) #do your video process here
 
