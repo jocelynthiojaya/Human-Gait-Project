@@ -24,14 +24,14 @@ for file in os.listdir(directory):
         df_angles = df[["r_hip_ang", "r_knee_ang", "r_ankle_ang", "r_elbow_ang", "r_shoulder_ang"]]
         all_angles = df_angles.values.tolist()
 
-        single_video.append(all_angles)
+        single_video.append(all_angles[:100])
         single_video.append(gender)
         single_video.append(filename)
         # single video is one row correct
 
         final_list.append(single_video)
 
-header = ['angles','gender']
+header = ['angles', 'gender', 'filename']
 with open('test2.csv', 'w', newline = '') as file:
     writer = csv.writer(file)
     writer.writerow(header)
