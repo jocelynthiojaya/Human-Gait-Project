@@ -64,13 +64,7 @@ for file in os.listdir(directory):
             lmList = detector.findPosition(img, False)
             current_Frame = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
             if len(lmList) != 0:
-                left_hip = detector.findAngle(img, 11, 23, 25)
-                left_knee = detector.findAngle(img, 23, 25, 27)
-                left_ankle = detector.findAngle(img, 25, 27, 31)
-                left_shoulder = detector.findAngle(img, 13, 11, 23)
-                left_elbow = detector.findAngle(img, 11, 13, 15)
 
-                
                 right_hip = detector.findAngle(img, 12, 24, 26)
                 right_knee = detector.findAngle(img, 24, 26, 28)
                 right_ankle = detector.findAngle(img, 26, 28, 32)
