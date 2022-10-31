@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 
-def outputGraph(filename, x1, y1, title1,
+def outputGraph(filename, name, nametag,
+                x1, y1, title1,
                 x2, y2, title2,
                 x3, y3, title3,
                 x4, y4, title4,
@@ -22,4 +23,4 @@ def outputGraph(filename, x1, y1, title1,
     fig.set_figwidth(20)
     fig.set_figheight(10)
 
-    plt.savefig('graphoutput/' + filename + '.png')
+    plt.savefig(name +"/" + nametag + "_graphoutput/" + filename + '.png')

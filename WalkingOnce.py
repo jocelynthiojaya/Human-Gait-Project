@@ -1,16 +1,22 @@
 import cv2
+from matplotlib.legend_handler import HandlerNpointsYoffsets
 import PoseModule as pm
+from math import factorial
 from OutputGraph import outputGraph
 from OutputData import outputData
 
 
-filename = "a.mp4"
+name = "Hanny"
+nametag = "han"
+gender = "female"
+filename = "hanny100.mp4"
+
 if filename.endswith(".mp4"):
     print(filename) #do your video process here
 
-
     # INITIALIZING STUFF
-    cap = cv2.VideoCapture('inputvids/' + filename)
+    cap = cv2.VideoCapture(name + "/" + nametag + "_inputvids/" + filename)
+
     detector = pm.poseDetector()
     count = 0
     direction = 0
@@ -22,8 +28,10 @@ if filename.endswith(".mp4"):
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     frame_size = (width, height)
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    
     frame_list = []
 
+    # Lists for graphing
     right_hip_x = []
     right_hip_y = []
 
@@ -41,8 +49,7 @@ if filename.endswith(".mp4"):
 
 
     # Initialize video writer.
-    video_output = cv2.VideoWriter('outputvids/' + filename, fourcc, fps, frame_size)
-
+    video_output = cv2.VideoWriter(name + "/" + nametag + "_outputvids/" + filename, fourcc, fps, frame_size)
 
     # WORKING WITH MEDIAPIPE
     while cap.isOpened():
@@ -57,13 +64,7 @@ if filename.endswith(".mp4"):
         lmList = detector.findPosition(img, False)
         current_Frame = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
         if len(lmList) != 0:
-            # left_hip = detector.findAngle(img, 11, 23, 25)
-            # left_knee = detector.findAngle(img, 23, 25, 27)
-            # left_ankle = detector.findAngle(img, 25, 27, 31)
-            # left_shoulder = detector.findAngle(img, 13, 11, 23)
-            # left_elbow = detector.findAngle(img, 11, 13, 15)
-
-            
+       
             right_hip = detector.findAngle(img, 12, 24, 26)
             right_knee = detector.findAngle(img, 24, 26, 28)
             right_ankle = detector.findAngle(img, 26, 28, 32)
@@ -71,8 +72,10 @@ if filename.endswith(".mp4"):
             right_elbow = detector.findAngle(img, 12, 14, 16)
 
             # Change the Gender Accordingly
-            frame_list.append([current_Frame,right_hip,right_knee,right_ankle,right_elbow,right_shoulder, "female"])
+            frame_list.append([current_Frame, 
+            right_hip, right_knee, right_ankle, right_elbow, right_shoulder, gender])
             
+            # Append to lists for graphing
             right_hip_x.append(current_Frame)
             right_hip_y.append(int(right_hip))
             
@@ -106,7 +109,7 @@ if filename.endswith(".mp4"):
     video_output.release()
 
     # GRAPH OUTPUT
-    outputGraph(filename[:-4], 
+    outputGraph(filename[:-4], name, nametag,
                 right_hip_x, right_hip_y, 'Right Hip Angle',
                 right_knee_x, right_knee_y, 'Right Knee Angle',
                 right_ankle_x, right_ankle_y, 'Right Ankle Angle',
@@ -114,7 +117,7 @@ if filename.endswith(".mp4"):
                 right_shoulder_x, right_shoulder_y, 'Right Shoulder Angle')
 
     # DATA OUTPUT
-    outputData(filename[:-4], frame_list)
+    outputCsv(filename[:-4], name, nametag, frame_list)
 
     print('finished')
 else:

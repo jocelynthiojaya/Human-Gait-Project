@@ -115,7 +115,7 @@ for file in os.listdir(directory):
                     right_shoulder_x, right_shoulder_y, 'Right Shoulder Angle')
 
         # DATA OUTPUT
-        outputData(filename[:-4], frame_list)
+        outputCsv(filename[:-4], frame_list)
 
         print('finished')
     else:
