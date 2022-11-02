@@ -3,7 +3,7 @@ from matplotlib.legend_handler import HandlerNpointsYoffsets
 import PoseModule as pm
 from math import factorial
 from OutputGraph import outputGraph
-from OutputData import outputData
+from OutputCsv import outputCsv
 
 
 name = "Hanny"

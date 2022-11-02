@@ -1,6 +1,6 @@
 import csv
 
-def outputData(filename, name, nametag, frame_list):
+def outputCsv(filename, name, nametag, frame_list):
     header = ['frame',
     'r_hip_ang','r_knee_ang','r_ankle_ang','r_elbow_ang','r_shoulder_ang', 
     'gender']
