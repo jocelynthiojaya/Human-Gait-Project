@@ -6,7 +6,7 @@ from math import factorial
 import csv
 import os
 from OutputGraph import outputGraph
-from OutputData import outputData
+from OutputCsv import outputCsv
 
 directory = os.fsencode("inputvids")
   
