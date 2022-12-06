@@ -2,9 +2,9 @@ import pandas as pd
 import os
 import csv
 
-name = "Vincent"
-nametag = "vin"
-directory = os.fsencode(name + "/" + nametag + "_csvoutput/")
+folder = "Cipto"
+nametag = "cip"
+directory = os.fsencode(folder + "/" + nametag + "_csvoutput/")
 
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
@@ -14,7 +14,7 @@ for file in os.listdir(directory):
         fps = 30
 
         # Load csv into dataframe
-        df = pd.read_csv(name + "/" + nametag + "_csvoutput/" + filename)
+        df = pd.read_csv(folder + "/" + nametag + "_csvoutput/" + filename)
         df_angles = df[["r_hip_ang", "r_knee_ang", "r_ankle_ang", "r_elbow_ang", "r_shoulder_ang"]]
         df_frames = df[["frame"]]
 
@@ -66,4 +66,6 @@ for file in os.listdir(directory):
         #print(df)
 
         # Write to csv
-        df.to_csv(name + "/" + nametag + "_csvoutputVA/" + filename, index=False)
+        df.to_csv(folder + "/" + nametag + "_csvoutputVA/" + filename, index=False)
+
+print("finished")

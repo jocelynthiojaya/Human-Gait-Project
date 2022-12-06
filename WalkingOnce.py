@@ -1,21 +1,21 @@
 import cv2
-from matplotlib.legend_handler import HandlerNpointsYoffsets
+
 import PoseModule as pm
-from math import factorial
 from OutputGraph import outputGraph
 from OutputCsv import outputCsv
 
 
-name = "Hanny"
-nametag = "han"
+folder = "Nurultest"
+nametag = "nur"
 gender = "female"
-filename = "hanny100.mp4"
+age = ">40"
+filename = "nurul1.mp4"
 
 if filename.endswith(".mp4"):
     print(filename) #do your video process here
 
     # INITIALIZING STUFF
-    cap = cv2.VideoCapture(name + "/" + nametag + "_inputvids/" + filename)
+    cap = cv2.VideoCapture(folder + "/" + nametag + "_inputvids/" + filename)
 
     detector = pm.poseDetector()
     count = 0
@@ -49,7 +49,7 @@ if filename.endswith(".mp4"):
 
 
     # Initialize video writer.
-    video_output = cv2.VideoWriter(name + "/" + nametag + "_outputvids/" + filename, fourcc, fps, frame_size)
+    video_output = cv2.VideoWriter(folder + "/" + nametag + "_outputvids/" + filename, fourcc, fps, frame_size)
 
     # WORKING WITH MEDIAPIPE
     while cap.isOpened():
@@ -73,7 +73,8 @@ if filename.endswith(".mp4"):
 
             # Change the Gender Accordingly
             frame_list.append([current_Frame, 
-            right_hip, right_knee, right_ankle, right_elbow, right_shoulder, gender])
+            right_hip, right_knee, right_ankle, right_elbow, right_shoulder, 
+            gender, age])
             
             # Append to lists for graphing
             right_hip_x.append(current_Frame)
@@ -109,7 +110,7 @@ if filename.endswith(".mp4"):
     video_output.release()
 
     # GRAPH OUTPUT
-    outputGraph(filename[:-4], name, nametag,
+    outputGraph(filename[:-4], folder, nametag,
                 right_hip_x, right_hip_y, 'Right Hip Angle',
                 right_knee_x, right_knee_y, 'Right Knee Angle',
                 right_ankle_x, right_ankle_y, 'Right Ankle Angle',
@@ -117,7 +118,7 @@ if filename.endswith(".mp4"):
                 right_shoulder_x, right_shoulder_y, 'Right Shoulder Angle')
 
     # DATA OUTPUT
-    outputCsv(filename[:-4], name, nametag, frame_list)
+    outputCsv(filename[:-4], folder, nametag, frame_list)
 
     print('finished')
 else:

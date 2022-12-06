@@ -1,14 +1,15 @@
 import cv2
-import mediapipe as mp
-import numpy as np
 import PoseModule as pm
-from math import factorial
-import csv
 import os
 from OutputGraph import outputGraph
 from OutputCsv import outputCsv
 
-directory = os.fsencode("inputvids")
+folder = "Cipto"
+nametag = "cip"
+gender = "male"
+age = ">40"
+
+directory = os.fsencode(folder + "/" + nametag + "_inputvids/")
   
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
@@ -17,7 +18,8 @@ for file in os.listdir(directory):
     
 
         # INITIALIZING STUFF
-        cap = cv2.VideoCapture('inputvids/' + filename)
+        cap = cv2.VideoCapture(folder + "/" + nametag + "_inputvids/" + filename)
+        
         detector = pm.poseDetector()
         count = 0
         direction = 0
@@ -29,8 +31,10 @@ for file in os.listdir(directory):
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         frame_size = (width, height)
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+
         frame_list = []
 
+        # Lists for graphing
         right_hip_x = []
         right_hip_y = []
 
@@ -48,7 +52,7 @@ for file in os.listdir(directory):
 
 
         # Initialize video writer.
-        video_output = cv2.VideoWriter('outputvids/test/' + filename, fourcc, fps, frame_size)
+        video_output = cv2.VideoWriter(folder + "/" + nametag + "_outputvids/" + filename, fourcc, fps, frame_size)
 
 
         # WORKING WITH MEDIAPIPE
@@ -72,7 +76,8 @@ for file in os.listdir(directory):
                 right_elbow = detector.findAngle(img, 12, 14, 16)
 
                 # Change the Gender Accordingly
-                frame_list.append([current_Frame,right_hip,right_knee,right_ankle,right_elbow,right_shoulder, "gender"])
+                frame_list.append([current_Frame,right_hip,right_knee,right_ankle,right_elbow,right_shoulder, 
+                gender, age])
                 
                 right_hip_x.append(current_Frame)
                 right_hip_y.append(int(right_hip))
@@ -107,7 +112,7 @@ for file in os.listdir(directory):
         video_output.release()
 
         # GRAPH OUTPUT
-        outputGraph(filename[:-4], 
+        outputGraph(filename[:-4], folder, nametag,
                     right_hip_x, right_hip_y, 'Right Hip Angle',
                     right_knee_x, right_knee_y, 'Right Knee Angle',
                     right_ankle_x, right_ankle_y, 'Right Ankle Angle',
@@ -115,7 +120,7 @@ for file in os.listdir(directory):
                     right_shoulder_x, right_shoulder_y, 'Right Shoulder Angle')
 
         # DATA OUTPUT
-        outputCsv(filename[:-4], frame_list)
+        outputCsv(filename[:-4], folder, nametag, frame_list)
 
         print('finished')
     else:
