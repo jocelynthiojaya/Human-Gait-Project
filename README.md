@@ -12,13 +12,13 @@ Used to concatenate all csv files within a folder, into one csv file.
 **PoseModule.py**
 Functions using Mediapipe's Pose Detection to draw landmarks and calculate joint angles. Credit to https://github.com/aryanvij02/PushUpCounter 
 
-**WalkingLoop.py*
+**WalkingLoop.py**
 Takes a folder with .mp4 videos and generates data of joint angles, making 3 outputs:
 - Videos with landmarks drawn on top
 - Csv files containing angular data by calling **OutputCsv.py**
 - Graph images of angular data by calling **OutputGraph.py**
 
-**WalkingOnce.py*
+**WalkingOnce.py**
 Has the same usage as **WalkingLoop.py**, but only takes a single .mp4 video.
 
 **GenerateVelocityAccel.py**
