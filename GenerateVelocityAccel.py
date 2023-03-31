@@ -2,8 +2,8 @@ import pandas as pd
 import os
 import csv
 
-folder = "Cipto"
-nametag = "cip"
+folder = "foldername"
+nametag = "tag"
 directory = os.fsencode(folder + "/" + nametag + "_csvoutput/")
 
 for file in os.listdir(directory):
@@ -20,20 +20,16 @@ for file in os.listdir(directory):
 
         # Calculate time (frame/fps)
         df_time = df_frames.div(fps, axis=0)
-        #print(df_time)
 
         # Calculate difference between angles
         delta_angles = df_angles.diff(axis=0)
         delta_angles = delta_angles.fillna(0)
-        #print(delta_angles)
 
         # Calculate velocity (delta theta / time)
         velocity = delta_angles.div(df_time.frame, axis=0)
-        #print(velocity)
 
         # Calculate acceleration
         acceleration = velocity.div(df_time.frame, axis=0)
-        #print(acceleration)
 
         # Append dataframes
         df[["r_hip_vel", "r_knee_vel", "r_ankle_vel", "r_elbow_vel", "r_shoulder_vel"]] = velocity
@@ -62,8 +58,6 @@ for file in os.listdir(directory):
         
         # Fill null with 0
         df = df.fillna(0)
-
-        #print(df)
 
         # Write to csv
         df.to_csv(folder + "/" + nametag + "_csvoutputVA/" + filename, index=False)

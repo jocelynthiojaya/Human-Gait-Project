@@ -4,8 +4,8 @@ import os
 from OutputGraph import outputGraph
 from OutputCsv import outputCsv
 
-folder = "Cipto"
-nametag = "cip"
+folder = "foldername"
+nametag = "tag"
 gender = "male"
 age = ">40"
 

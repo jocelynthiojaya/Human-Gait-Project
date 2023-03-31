@@ -17,4 +17,4 @@ final_frame = pd.concat(li, axis=0, ignore_index=True)
 
 #print(frame)
 
-final_frame.to_csv(folder + '/walk.csv', index=False)
+final_frame.to_csv(folder + '/concat_filename.csv', index=False)

@@ -5,11 +5,11 @@ from OutputGraph import outputGraph
 from OutputCsv import outputCsv
 
 
-folder = "Nurultest"
-nametag = "nur"
+folder = "foldername"
+nametag = "tag"
 gender = "female"
 age = ">40"
-filename = "nurul1.mp4"
+filename = "filename.mp4"
 
 if filename.endswith(".mp4"):
     print(filename) #do your video process here
